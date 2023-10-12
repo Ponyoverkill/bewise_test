@@ -1,6 +1,6 @@
 # bewise_test
-Write DB_PASS, DB_USER, POSTGRES_USER, POSTGRES_PASSWORD in .env file
-using console located in repository use:
+Write DB_PASS, DB_USER, POSTGRES_USER, POSTGRES_PASSWORD in .env file.
+Using console located in repository use:
 
 docker compose build
 docker compose up
