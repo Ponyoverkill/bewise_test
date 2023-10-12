@@ -1,11 +1,14 @@
+from typing import Annotated
+
 import httpx
+from fastapi import Body
 from pydantic import ValidationError
 
 from schemas import Question
 from config import JSERVICE_URL
 
 
-async def send_request(questions_num: int) -> list[Question]:
+async def send_request(questions_num: Annotated[int, Body(embed=True)]) -> list[Question]:
     async with httpx.AsyncClient() as client:
         response = await client.request(method='GET',
                                         url=JSERVICE_URL,
