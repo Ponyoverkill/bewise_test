@@ -1,7 +1,7 @@
 import httpx
 from pydantic import ValidationError
 
-from schemas import Category, Question
+from schemas import Question
 from config import JSERVICE_URL
 
 

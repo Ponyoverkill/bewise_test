@@ -5,14 +5,6 @@ from dependencies import send_request
 from schemas import Question, Category
 from models import Question as Quest, Category as Cat
 
-from sqlalchemy import select
-
-
-async def get_questions(db: AsyncSession, count: int):
-
-    query = select(Quest.id).limit(count)
-    return (await db.execute(query)).scalars().all()
-
 
 async def add_cat(db: AsyncSession, category: Category) -> None:
     '''

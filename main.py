@@ -23,8 +23,4 @@ async def question(
     last_question = (await add_questions(db, items)).model_dump_json()
     return JSONResponse(json.loads(last_question), status_code=200)
 
-from crud import get_questions
-@app.get('/questions')
-async def questions(count: int, db: AsyncSession = Depends(get_async_session)):
 
-    return await get_questions(db, count)

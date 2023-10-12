@@ -2,18 +2,14 @@ version: "3.9"
 services:
   db:
     image: postgres:14.8-alpine3.18
-#    build:
-#      context: ./db_init_script
     container_name: bewise_test_pgSQL
     env_file:
       - .env
-#    command: ["/bewise_test/db_init_script/pgsql.sh"]
     volumes:
-#      - ./db_init_script/pgsql.sh:/docker-entrypoint-initdb.d/001.sh
+      - ./db_init_sql/migration.sql:/docker-entrypoint-initdb.d/001.sql
       - questions-data:/var/lib/postgresql/data
-    command: -p 1221
-    expose:
-      - 1221
+    ports:
+      - "5432:5432"
   app:
     build:
       context: .
