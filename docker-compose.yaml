@@ -2,24 +2,33 @@ version: "3.9"
 services:
   db:
     image: postgres:14.8-alpine3.18
-    container_name: bewise_test_pgSQL
+    container_name: pgSQL
     env_file:
       - .env
     volumes:
       - ./db_init_sql/migration.sql:/docker-entrypoint-initdb.d/001.sql
       - questions-data:/var/lib/postgresql/data
+    networks:
+      - bewise-net
     ports:
-      - "5432:5432"
+      - "5431:5432"
   app:
     build:
       context: .
     env_file:
       - .env
-    container_name: bewise_test_app
+    container_name: app
     command: ["/bewise_test/app.sh"]
+    networks:
+      - bewise-net
     ports:
       - "1234:8000"
     depends_on:
       - db
 volumes:
   questions-data:
+
+networks:
+  bewise-net:
+    name: bewise-net
+
